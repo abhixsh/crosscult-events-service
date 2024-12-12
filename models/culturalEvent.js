@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const culturalEventSchema = new mongoose.Schema({
-    event_id: { type: String, required: true },
+    event_id: { type: String },
     title: { type: String, required: true },
     description: { type: String, required: true },
     start_date: { type: Date, required: true },
