@@ -1,0 +1,43 @@
+@startuml
+start
+
+:User logs in or registers;
+if (Is user an admin?) then (Yes)
+  :Admin Dashboard;
+  fork
+    :Manage Countries;
+    :Add/Edit/Delete Country Information;
+  end fork
+  fork
+    :Manage Users;
+    :Approve/Remove Users;
+  end fork
+  fork
+    :Manage Cultural Events;
+    :Add/Edit/Delete Event Details;
+  end fork
+  fork
+    :Manage User Stories;
+    :Approve/Delete User Stories;
+  end fork
+  stop
+else (No)
+  :User Dashboard;
+  if (Is user a content creator?) then (Yes)
+    :Create User Story;
+    :Add Title, Content, Tags, and Images;
+    :Submit Story for Approval;
+  endif
+  :Browse Cultural Events;
+  :Filter Events by Country or Type;
+  :View Event Details;
+  :Browse User Stories;
+  :Filter Stories by Tags or Country;
+  :View Story Details;
+  if (Favorite Country Selected?) then (Yes)
+    :Update Preferences;
+    :Save Favorite Countries and Preferences;
+  endif
+  stop
+endif
+@enduml

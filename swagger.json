@@ -1,0 +1,145 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Cultural Events API",
+      "description": "API for managing cultural events"
+    },
+    "host": "localhost:3001",
+    "basePath": "/api/events",
+    "schemes": ["http"],
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "Get all events",
+          "responses": {
+            "200": {
+              "description": "List of all events",
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/definitions/CulturalEvent" }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new event",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "event",
+              "required": true,
+              "schema": { "$ref": "#/definitions/CulturalEvent" }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Event created successfully",
+              "schema": { "$ref": "#/definitions/CulturalEvent" }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/{id}": {
+        "get": {
+          "summary": "Get an event by ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Event details",
+              "schema": { "$ref": "#/definitions/CulturalEvent" }
+            },
+            "404": {
+              "description": "Event not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update an event",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "event",
+              "required": true,
+              "schema": { "$ref": "#/definitions/CulturalEvent" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Event updated successfully",
+              "schema": { "$ref": "#/definitions/CulturalEvent" }
+            },
+            "404": {
+              "description": "Event not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete an event",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Event deleted successfully"
+            },
+            "404": {
+              "description": "Event not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "CulturalEvent": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "start_date": { "type": "string", "format": "date" },
+          "end_date": { "type": "string", "format": "date" },
+          "location": { "type": "string" },
+          "country": { "type": "string" },
+          "event_type": { "type": "string" },
+          "img_link": { "type": "string" },
+          "short_description": { "type": "string" }
+        },
+        "required": ["event_id", "title", "description", "start_date", "end_date", "location", "country", "event_type"]
+      }
+    }
+  }
+  

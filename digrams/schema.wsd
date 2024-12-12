@@ -1,0 +1,79 @@
+@startuml
+entity "Country" {
+  * country_id : Integer
+  * country_name : String
+  * country_img : String
+  * country_desc : Text
+  * history_main_img : String
+  * history_small_img : String
+  * history_desc : Text
+  * traditions_main_img : String
+  * traditions_small_img : String
+  * traditions_desc : Text
+  * food_main_img : String
+  * food_small_img : String
+  * food_desc : Text
+  * flag_img : String
+}
+
+entity "User" {
+  * user_id : Integer
+  * name : String
+  * username : String
+  * country : String
+  * email : String
+  * password : String
+  * profile_picture : String
+  * bio : Text
+  * role : Enum {content_creator, visitor}
+  * registration_date : Date
+  * fav_country : String
+  * preferences : Array {history, food}
+}
+
+entity "Admins" {
+  * admin_id : Integer
+  * name : String
+  * email : String
+  * notification_email : String
+  * password : String
+}
+
+entity "CulturalEvents" {
+  * event_id : Integer
+  * title : String
+  * description : Text
+  * start_date : Date
+  * end_date : Date
+  * location : String
+  * country : String
+  * event_type : String
+  * img_link : String
+  * short_description : Text
+}
+
+entity "UserStories" {
+  * story_id : Integer
+  * user_id : Integer
+  * title : String
+  * content : Text
+  * short_content : Text
+  * tags : Array
+  * previewd_img : String
+  * img_link : String
+  * posted_date : Date
+  * month : String
+  * budge : String
+  * season : String
+}
+
+' Country "1" -- "*" User : resides_in
+' Country "1" -- "*" CulturalEvents : hosts
+' Country "1" -- "*" UserStories : mentions
+User "1" -- "*" UserStories : writes
+' CulturalEvents "*" -- "*" UserStories : mentions
+Admins "1" -- "*" Country : manages
+Admins "1" -- "*" User : manages
+Admins "1" -- "*" CulturalEvents : manages
+Admins "1" -- "*" UserStories : manages
+@enduml
