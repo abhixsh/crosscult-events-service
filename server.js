@@ -4,10 +4,16 @@ const dotenv = require('dotenv');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const culturalEventRoutes = require('./routes/culturalEventRoutes');
+const cors = require('cors'); // Import cors
 
 dotenv.config();
 
 const app = express();
+
+// Allow requests from the frontend
+app.use(cors({
+    origin: 'http://localhost:5173', // Frontend's origin
+}));
 
 // Middleware
 app.use(express.json());
